@@ -2,7 +2,7 @@ const {v4 : uuid}= require("uuid");
 
 const userdata = {
 
-    users:[
+    "users":[
         {
             id:uuid(),
             username:"abhishekrawat",
@@ -18,3 +18,5 @@ const userdata = {
         }
     ]
 }
+
+module.exports = userdata;
