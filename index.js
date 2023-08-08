@@ -1,32 +1,25 @@
 const  express = require("express");
-
 const app = express();
-
 const PORT = 3000;
+const cors = require('cors');
+app.use(cors());
+app.use(express.json()); 
 
 const jwt = require("jsonwebtoken");
 
-const jwtKey = "abhi"
 
 const userdata = require("./db/users")
 
-const cors = require('cors');
 
-app.use(cors());
-
-const quizzes = require("./db/quizes");
+const quizRouter = require("./router/quiz.router");
 
 
-app.use(express.json()); 
-app.use(express.json());
 
 app.get("/",(req,res)=>{
     res.json("hello there");
 })
 
-app.get("/quiz",(req,res)=>{
-    res.json(quizzes.data);
-})
+app.use("/quiz",quizRouter)
 
 app.post("/auth/login",(req,res)=>{
     // const user={
@@ -42,7 +35,7 @@ app.post("/auth/login",(req,res)=>{
         res.json({
             token,
             username,
-            message: "Moj kardi bhai"
+            message: "user Verified"
         });
     }
     
