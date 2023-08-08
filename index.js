@@ -35,7 +35,7 @@ app.post("/auth/login",(req,res)=>{
         res.json({
             token,
             username,
-            message: "user Verified"
+            message: "user"
         });
     }
     
