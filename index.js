@@ -15,7 +15,7 @@ const {loginRouter,signUpRouter} = require("./router/auth.router")
 const routeNotFound = require("./middleware/routenotFound");
 
 const quiz = require("./db/quizes");
-app.get("/",(req,res)=>{
+app.get("/categories",(req,res)=>{
     res.json(quiz);
 })
 
