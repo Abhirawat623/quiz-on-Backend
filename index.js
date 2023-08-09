@@ -5,48 +5,28 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json()); 
 
-const jwt = require("jsonwebtoken");
 
-
-const userdata = require("./db/users")
 
 
 const quizRouter = require("./router/quiz.router");
 
+const {loginRouter,signUpRouter} = require("./router/auth.router")
 
+const routeNotFound = require("./middleware/routenotFound");
 
+const quiz = require("./db/quizes");
 app.get("/",(req,res)=>{
-    res.json("hello there");
+    res.json(quiz);
 })
 
 app.use("/quiz",quizRouter)
 
-app.post("/auth/login",(req,res)=>{
-    // const user={
-    //     id:1,
-    //     username: "abhisheksingh",
-    //     email:"abhishek@gmail.com"
-    // }
-    const { username, password } = req.body;
-    const isUserVerified = userdata.users.some(user => user.username === username && user.password === password);
-    if (isUserVerified) {
-        // Use the same token generated during sign-up instead of creating a new one
-        const token = jwt.sign({ id: username }, jwtKey, { expiresIn: '300s' });
-        res.json({
-            token,
-            username,
-            message: "user"
-        });
-    }
-    
-    else {
-        res.status(401).json({ message: "Invalid Credentials" });
-    }})
+app.use("/auth/login",loginRouter)
+
+app.use("/auth/signup",signUpRouter);
 
 
-
-
-
+app.use(routeNotFound);
 app.listen(PORT,()=>{
     console.log("server is started")
 }) 
