@@ -36,7 +36,7 @@ const quizzes = {
                 options:[
                     {id:uuid(),option:"Doctor Strange", isRight:true},
                     {id:uuid(),option:"Vision", isRight: false},
-                    {id:uuid(),option:"Hawk Eye", isRight: true},
+                    {id:uuid(),option:"Hawk Eye", isRight: false},
                     {id:uuid(),option:"Spider Man", isRight: false}
                 ]
             },{
